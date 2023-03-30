@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('liked_tracks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id");
-            $table->foreignId("track_id");
+            $table->foreignId("user_id")->constrained();
+            $table->foreignId("track_id")->constrained();
             $table->timestamps();
         });
     }
