@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function liked_tracks(){
         return $this->hasMany(LikedTrack::class);
     }
+
+    public function playlists(){
+        return $this->hasMany(Playlist::class);
+    }
 }
