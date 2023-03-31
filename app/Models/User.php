@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tracks(){
+        return $this->hasMany(Track::class);
+    }
+
+    public function liked_tracks(){
+        return $this->hasMany(LikedTrack::class);
+    }
 }
