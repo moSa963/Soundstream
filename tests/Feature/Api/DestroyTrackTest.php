@@ -3,6 +3,7 @@
 namespace Tests\Feature\Api;
 
 use App\Models\Track;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Storage;
@@ -26,5 +27,20 @@ class DestroyTrackTest extends TestCase
         $response->assertSuccessful();
 
         $this->assertTrue(!Storage::exists("tracks/{$track->location}"));
+    }
+
+    public function test_user_can_not_delete_other_users_track(): void
+    {
+        $track = Track::factory()->create();
+
+        Sanctum::actingAs(User::factory()->create());
+
+        $this->assertTrue(Storage::exists("tracks/{$track->location}"));
+
+        $response = $this->delete("api/tracks/{$track->id}");
+
+        $response->assertForbidden();
+
+        Storage::delete("tracks/{$track->location}");
     }
 }
