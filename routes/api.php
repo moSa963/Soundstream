@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PlaylistController;
+use App\Http\Controllers\Api\PlaylistTrackController;
 use App\Http\Controllers\Api\TrackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,11 @@ Route::controller(PlaylistController::class)
         Route::get("playlists", "index");
         Route::post("playlists", "store");
         Route::delete("playlists/{playlist}", "destroy");
+    });
+
+Route::controller(PlaylistTrackController::class)
+    ->middleware("auth:sanctum")
+    ->group(function(){
+        Route::post("playlists/{playlist}/tracks/{track}", "store");
+        Route::delete("playlists/{playlist}/tracks/{track}", "destroy");
     });
