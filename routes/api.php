@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LikedTrackController;
 use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\PlaylistTrackController;
 use App\Http\Controllers\Api\TrackController;
@@ -44,4 +45,12 @@ Route::controller(PlaylistTrackController::class)
     ->group(function(){
         Route::post("playlists/{playlist}/tracks/{track}", "store");
         Route::delete("playlists/{playlist}/tracks/{track}", "destroy");
+    });
+
+Route::controller(LikedTrackController::class)
+    ->middleware("auth:sanctum")
+    ->group(function(){
+        Route::get("likes", "index");
+        Route::post("likes/tracks/{track}", "store");
+        Route::delete("likes/tracks/{track}", "destroy");
     });
