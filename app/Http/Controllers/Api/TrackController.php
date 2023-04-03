@@ -35,8 +35,6 @@ class TrackController extends Controller
     {
         $this->authorize("delete", $track);
         
-        abort_if(!Storage::delete("tracks/{$track->location}"), 500, "Couldn't delete the file, please try again later");
-        
         $track->delete();
         
         return response()->noContent();
