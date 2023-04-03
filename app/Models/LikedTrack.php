@@ -14,4 +14,14 @@ class LikedTrack extends Model
         'user_id',
         'track_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function track()
+    {
+        return $this->belongsTo(Track::class);
+    }
 }
