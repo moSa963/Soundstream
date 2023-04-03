@@ -41,6 +41,8 @@ class DestroyTrackTest extends TestCase
 
         $response->assertForbidden();
 
+        $this->assertTrue(Storage::exists("tracks/{$track->location}"));
+
         Storage::delete("tracks/{$track->location}");
     }
 }

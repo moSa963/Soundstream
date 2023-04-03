@@ -7,6 +7,7 @@ use App\Models\PlaylistTrack;
 use App\Models\Track;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -31,5 +32,7 @@ class DestroyPlaylistTrackTest extends TestCase
         $response->assertSuccessful();
 
         $this->assertTrue(!PlaylistTrack::where("id", $pt->id)->exists());
+
+        Storage::delete("tracks/{$track->location}");
     }
 }
