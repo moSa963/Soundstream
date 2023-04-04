@@ -14,4 +14,8 @@ class TrackPolicy
         return $user->id == $track->user_id;
     }
 
+    public function show(User $user, Track $track): bool
+    {
+        return true;
+    }
 }
