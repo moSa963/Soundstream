@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\LikedTrackController;
 use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\PlaylistTrackController;
+use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -53,4 +54,9 @@ Route::controller(LikedTrackController::class)
         Route::get("likes", "index");
         Route::post("likes/tracks/{track}", "store");
         Route::delete("likes/tracks/{track}", "destroy");
+    });
+
+Route::controller(StreamTrackController::class)
+    ->group(function(){
+        Route::get("tracks/{track}/stream", "show");
     });
