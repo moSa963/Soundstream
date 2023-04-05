@@ -18,4 +18,9 @@ class TrackPolicy
     {
         return true;
     }
+
+    public function update(User $user, Track $track): bool
+    {
+        return $user->id == $track->user_id;
+    }
 }
