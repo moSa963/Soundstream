@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\PlaylistTrackController;
 use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
+use App\Http\Controllers\Api\TrackPhotoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,4 +60,11 @@ Route::controller(LikedTrackController::class)
 Route::controller(StreamTrackController::class)
     ->group(function(){
         Route::get("tracks/{track}/stream", "show");
+    });
+
+Route::controller(TrackPhotoController::class)
+    ->group(function(){
+        Route::get("tracks/{track}/photo", "index");
+        Route::post("tracks/{track}/photo", "update");
+        Route::delete("tracks/{track}/photo", "destroy");
     });
