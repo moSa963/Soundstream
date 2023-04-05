@@ -13,5 +13,6 @@ class TrackObserver
     public function deleted(Track $track): void
     {
         Storage::delete("tracks/{$track->location}");
+        $track->photo && Storage::delete("track_photo/{$track->photo}");
     }
 }
