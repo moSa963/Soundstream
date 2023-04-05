@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\LikedTrackController;
 use App\Http\Controllers\Api\PlaylistController;
+use App\Http\Controllers\Api\PlaylistPhotoController;
 use App\Http\Controllers\Api\PlaylistTrackController;
 use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
@@ -67,4 +68,11 @@ Route::controller(TrackPhotoController::class)
         Route::get("tracks/{track}/photo", "index");
         Route::post("tracks/{track}/photo", "update");
         Route::delete("tracks/{track}/photo", "destroy");
+    });
+
+Route::controller(PlaylistPhotoController::class)
+    ->group(function(){
+        Route::get("playlists/{playlist}/photo", "index");
+        Route::post("playlists/{playlist}/photo", "update");
+        Route::delete("playlists/{playlist}/photo", "destroy");
     });
