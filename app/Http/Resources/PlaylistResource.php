@@ -15,12 +15,14 @@ class PlaylistResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'user' => [
                 "username" => $this->user->username,
             ],
             'title' => $this->title,
             'description' => $this->description,
             'album' => $this->album,
+            'created_at' => $this->created_at,
         ];
     }
 }
