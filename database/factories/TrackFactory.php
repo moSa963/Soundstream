@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Track;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\File;
@@ -22,7 +23,7 @@ class TrackFactory extends Factory
         $path = Storage::putFile("tracks", "storage\\factory.mp3");
 
         return [
-            'user_id' => User::factory()->create()->id,
+            'user_id' => 0,
             'title' => fake()->sentence(),
             'location' => explode("/", $path, 2)[1],
             'duration' => 0,
@@ -30,5 +31,15 @@ class TrackFactory extends Factory
             'written_by' => fake()->name(),
             'performed_by' => fake()->name(),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function(Track $track) {
+            if ($track->user_id == 0)
+            {
+                $track->user_id = User::factory()->create()->id;
+            }
+        });
     }
 }

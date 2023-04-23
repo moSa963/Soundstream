@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\LikedTrack;
 use App\Models\Track;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,8 +20,23 @@ class LikedTrackFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory()->create()->id,
-            'track_id' => Track::factory()->create()->id,
+            'user_id' => 0,
+            'track_id' => 0,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function(LikedTrack $likedTrack) {
+            if ($likedTrack->user_id == 0)
+            {
+                $likedTrack->user_id = User::factory()->create()->id;
+            }
+
+            if ($likedTrack->track_id == 0)
+            {
+                $likedTrack->track_id = Track::factory()->create()->id;
+            }
+        });
     }
 }

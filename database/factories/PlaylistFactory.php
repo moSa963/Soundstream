@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Playlist;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,10 +19,20 @@ class PlaylistFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory()->create()->id,
+            'user_id' => 0,
             'title' => fake()->title(),
             'description' => fake()->paragraph(2),
             'album' => false,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function(Playlist $playlist) {
+            if ($playlist->user_id == 0)
+            {
+                $playlist->user_id = User::factory()->create()->id;
+            }
+        });
     }
 }
