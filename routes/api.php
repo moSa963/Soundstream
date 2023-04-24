@@ -54,6 +54,7 @@ Route::controller(PlaylistController::class)
 Route::controller(PlaylistTrackController::class)
     ->middleware("auth:sanctum")
     ->group(function(){
+        Route::get("playlists/{playlist}/tracks", "index");
         Route::post("playlists/{playlist}/tracks/{track}", "store");
         Route::delete("playlists/{playlist}/tracks/{track}", "destroy");
     });
