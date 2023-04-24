@@ -14,7 +14,7 @@ class TrackController extends Controller
 {
     public function index(Request $request)
     {
-        $tracks = $request->user()->tracks()->simplePaginate(10);
+        $tracks = $request->user()->tracks()->get();
 
         return TrackResource::collection($tracks);
     }

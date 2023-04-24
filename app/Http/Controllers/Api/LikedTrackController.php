@@ -12,7 +12,7 @@ class LikedTrackController extends Controller
 {
     public function index(Request $request)
     {
-        $tracks = $request->user()->liked_tracks()->simplePaginate(10);
+        $tracks = $request->user()->liked_tracks()->get();
         
         return TrackResource::collection($tracks);
     }
