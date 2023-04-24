@@ -12,9 +12,16 @@ class PlaylistController extends Controller
 {
     public function index(Request $request)
     {
-        $playlists = $request->user()->playlists()->simplePaginate(10);
+        $playlists = $request->user()->playlists()->get();
 
         return PlaylistResource::collection($playlists);
+    }
+
+    public function show(Request $request, Playlist $playlist)
+    {   
+        $this->authorize("view", $playlist);
+
+        return new PlaylistResource($playlist);
     }
 
     public function store(StorePlaylistRequest $request)
