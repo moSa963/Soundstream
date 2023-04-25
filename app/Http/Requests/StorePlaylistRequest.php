@@ -22,7 +22,7 @@ class StorePlaylistRequest extends FormRequest
         return Playlist::create([
             'user_id' => $user->id,
             'title' => $this->validated("title"),
-            'description' => $this->validated("title", ""),
+            'description' => $this->validated("description", ""),
             'album' => false,
         ]);
     }
