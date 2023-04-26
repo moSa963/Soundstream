@@ -18,7 +18,7 @@ class TrackPhotoController extends Controller
             return Storage::response("track_photo/{$track->photo}");
         }
 
-        return response()->noContent();
+        return response()->redirectTo("img/track.png");
     }
 
     public function update(UpdateTrackPhotoRequest $request, Track $track)

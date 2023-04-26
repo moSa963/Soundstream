@@ -18,7 +18,7 @@ class PlaylistPhotoController extends Controller
             return Storage::response("playlist_photo/{$playlist->photo}");
         }
 
-        return response()->noContent();
+        return response()->redirectTo("img/playlist.png");
     }
 
     public function update(UpdatePlaylistPhotoRequest $request, Playlist $playlist)
