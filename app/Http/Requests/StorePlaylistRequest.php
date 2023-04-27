@@ -21,9 +21,17 @@ class StorePlaylistRequest extends FormRequest
     {
         return Playlist::create([
             'user_id' => $user->id,
-            'title' => $this->validated("title"),
+            'title' => $this->validated("title", "playlist ".($user->playlists()->count() + 1)),
             'description' => $this->validated("description", ""),
             'album' => false,
+        ]);
+    }
+
+    public function update(Playlist $playlist)
+    {
+        return $playlist->update([
+            'title' => $this->validated("title", $playlist->title),
+            'description' => $this->validated("description", $playlist->description),
         ]);
     }
 
@@ -35,7 +43,7 @@ class StorePlaylistRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['string', 'max:255'],
             'description' => ['string', 'max:1500'],
         ];
     }

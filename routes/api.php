@@ -48,6 +48,7 @@ Route::controller(PlaylistController::class)
         Route::get("playlists", "index");
         Route::get("playlists/{playlist}", "show");
         Route::post("playlists", "store");
+        Route::post("playlists/{playlist}", "update");
         Route::delete("playlists/{playlist}", "destroy");
     });
 

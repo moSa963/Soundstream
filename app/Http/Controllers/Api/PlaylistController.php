@@ -31,6 +31,15 @@ class PlaylistController extends Controller
         return new PlaylistResource($playlist);
     }
 
+    public function update(StorePlaylistRequest $request, Playlist $playlist)
+    {   
+        $this->authorize("update", $playlist);
+
+        $request->update($playlist);
+
+        return new PlaylistResource($playlist);
+    }
+
     public function destroy(Request $request, Playlist $playlist)
     {
         $this->authorize("delete", $playlist);
