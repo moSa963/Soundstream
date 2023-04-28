@@ -77,13 +77,13 @@ Route::controller(StreamTrackController::class)
 Route::controller(TrackPhotoController::class)
     ->group(function(){
         Route::get("tracks/{track}/photo", "index");
-        Route::post("tracks/{track}/photo", "update");
-        Route::delete("tracks/{track}/photo", "destroy");
+        Route::post("tracks/{track}/photo", "update")->middleware("auth:sanctum");
+        Route::delete("tracks/{track}/photo", "destroy")->middleware("auth:sanctum");
     });
 
 Route::controller(PlaylistPhotoController::class)
     ->group(function(){
         Route::get("playlists/{playlist}/photo", "index");
-        Route::post("playlists/{playlist}/photo", "update");
-        Route::delete("playlists/{playlist}/photo", "destroy");
+        Route::post("playlists/{playlist}/photo", "update")->middleware("auth:sanctum");
+        Route::delete("playlists/{playlist}/photo", "destroy")->middleware("auth:sanctum");
     });
