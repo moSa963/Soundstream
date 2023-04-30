@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('liked_tracks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
-            $table->foreignId("track_id")->constrained();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("track_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
