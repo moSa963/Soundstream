@@ -18,14 +18,14 @@ class StoreTrackRequest extends FormRequest
         return Auth::check();
     }
 
-    public function store(User $user) : Track
+    public function store() : Track
     {
         $path = $this->file("track")->store("tracks", 'local');
 
         abort_if(!$path, 400, "Couldn't save the track"); 
 
         return Track::create([
-            'user_id' => $user->id,
+            'user_id' => $this->user()->id,
             'title' => $this->validated("title"),
             'location' => explode('/', $path, 2)[1],
             'duration' => 0,

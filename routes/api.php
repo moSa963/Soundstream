@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AlbumController;
+use App\Http\Controllers\Api\AlbumTrackController;
 use App\Http\Controllers\Api\LikedTrackController;
 use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\PlaylistPhotoController;
@@ -36,16 +38,16 @@ Route::controller(UserController::class)
 
 Route::controller(TrackController::class)
     ->middleware("auth:sanctum")
-    ->group(function(){
+    ->group(function () {
         Route::get("tracks", "index");
         Route::get("tracks/{track}", "show");
-        Route::post("tracks", "store");
+        Route::post("tracks/albums/{playlist}", "store");
         Route::delete("tracks/{track}", "destroy");
     });
 
 Route::controller(PlaylistController::class)
     ->middleware("auth:sanctum")
-    ->group(function(){
+    ->group(function () {
         Route::get("playlists", "index");
         Route::get("playlists/{playlist}", "show");
         Route::post("playlists", "store");
@@ -55,7 +57,7 @@ Route::controller(PlaylistController::class)
 
 Route::controller(PlaylistTrackController::class)
     ->middleware("auth:sanctum")
-    ->group(function(){
+    ->group(function () {
         Route::get("playlists/{playlist}/tracks", "index");
         Route::post("playlists/{playlist}/tracks/{track}", "store");
         Route::delete("playlists/{playlist}/tracks/{track}", "destroy");
@@ -63,27 +65,34 @@ Route::controller(PlaylistTrackController::class)
 
 Route::controller(LikedTrackController::class)
     ->middleware("auth:sanctum")
-    ->group(function(){
+    ->group(function () {
         Route::get("likes", "index");
         Route::post("likes/tracks/{track}", "store");
         Route::delete("likes/tracks/{track}", "destroy");
     });
 
 Route::controller(StreamTrackController::class)
-    ->group(function(){
+    ->group(function () {
         Route::get("tracks/{track}/stream", "show");
     });
 
 Route::controller(TrackPhotoController::class)
-    ->group(function(){
+    ->group(function () {
         Route::get("tracks/{track}/photo", "index");
         Route::post("tracks/{track}/photo", "update")->middleware("auth:sanctum");
         Route::delete("tracks/{track}/photo", "destroy")->middleware("auth:sanctum");
     });
 
 Route::controller(PlaylistPhotoController::class)
-    ->group(function(){
+    ->group(function () {
         Route::get("playlists/{playlist}/photo", "index");
         Route::post("playlists/{playlist}/photo", "update")->middleware("auth:sanctum");
         Route::delete("playlists/{playlist}/photo", "destroy")->middleware("auth:sanctum");
+    });
+
+Route::controller(AlbumController::class)
+    ->middleware("auth:sanctum")
+    ->group(function () {
+        Route::get("albums", "index");
+        Route::post("albums", "store");
     });

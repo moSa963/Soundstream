@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Playlist;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -18,9 +19,14 @@ class StoreTrackTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $playlist = Playlist::factory()->create([
+            "user_id" => $user->id,
+            "album" => true,
+        ]);
+
         Sanctum::actingAs($user);
 
-        $response = $this->post('api/tracks', [
+        $response = $this->post("api/tracks/albums/{$playlist->id}", [
             "title" => "test title",
             "track" => UploadedFile::fake()->create("testfile", 10, "audio/mp3"),
         ]);
@@ -38,9 +44,14 @@ class StoreTrackTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $playlist = Playlist::factory()->create([
+            "user_id" => $user->id,
+            "album" => true,
+        ]);
+
         Sanctum::actingAs($user);
 
-        $response = $this->post('api/tracks', [
+        $response = $this->post("api/tracks/albums/{$playlist->id}", [
             "title" => "test title",
             "track" => UploadedFile::fake()->image("imageTest"),
         ]);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTrackRequest;
 use App\Http\Resources\TrackResource;
+use App\Models\Playlist;
 use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,11 @@ class TrackController extends Controller
         return new TrackResource($track);
     }
 
-    public function store(StoreTrackRequest $request) 
+    public function store(StoreTrackRequest $request, Playlist $playlist) 
     {
-        $track = $request->store(Auth::user());
+        $this->authorize("uploadTrack", $playlist);
+
+        $track = $request->store();
 
         return new TrackResource($track);
     }

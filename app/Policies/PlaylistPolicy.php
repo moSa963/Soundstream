@@ -17,9 +17,11 @@ class PlaylistPolicy
         return true;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
+    public function uploadTrack(User $user, Playlist $playlist): bool
+    {
+        return $playlist->album && $user->id == $playlist->user_id;
+    }
+    
     public function delete(User $user, Playlist $playlist): bool
     {
         return $user->id == $playlist->user_id;
@@ -27,6 +29,6 @@ class PlaylistPolicy
 
     public function update(User $user, Playlist $playlist): bool
     {
-        return $user->id == $playlist->user_id;
+        return !$playlist->album && $user->id == $playlist->user_id;
     }
 }
