@@ -17,13 +17,13 @@ class StorePlaylistRequest extends FormRequest
         return Auth::check();
     }
 
-    public function store(User $user)
+    public function store(User $user, bool $album = false)
     {
         return Playlist::create([
             'user_id' => $user->id,
             'title' => $this->validated("title", "playlist ".($user->playlists()->count() + 1)),
             'description' => $this->validated("description", ""),
-            'album' => false,
+            'album' => $album,
         ]);
     }
 
