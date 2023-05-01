@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Playlist;
+use App\Models\PlaylistTrack;
 use App\Models\Track;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class StoreTrackRequest extends FormRequest
@@ -18,13 +21,13 @@ class StoreTrackRequest extends FormRequest
         return Auth::check();
     }
 
-    public function store() : Track
+    public function store(Playlist $album): Track
     {
         $path = $this->file("track")->store("tracks", 'local');
 
-        abort_if(!$path, 400, "Couldn't save the track"); 
+        abort_if(!$path, 400, "Couldn't save the track");
 
-        return Track::create([
+        $data = [
             'user_id' => $this->user()->id,
             'title' => $this->validated("title"),
             'location' => explode('/', $path, 2)[1],
@@ -32,7 +35,18 @@ class StoreTrackRequest extends FormRequest
             'explicit' => $this->validated("explicit", false),
             'written_by' => $this->validated("written_by", ""),
             'performed_by' => $this->validated("performed_by", ""),
-        ]);
+        ];
+
+        return DB::transaction(function () use ($data, $album) {
+            $track = Track::create($data);
+
+            PlaylistTrack::create([
+                "playlist_id" => $album->id,
+                "track_id" => $track->id,
+            ]);
+
+            return $track;
+        });
     }
 
     /**

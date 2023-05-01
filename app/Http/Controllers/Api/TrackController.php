@@ -29,7 +29,7 @@ class TrackController extends Controller
     {
         $this->authorize("uploadTrack", $playlist);
 
-        $track = $request->store();
+        $track = $request->store($playlist);
 
         return new TrackResource($track);
     }
