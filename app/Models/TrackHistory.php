@@ -27,8 +27,12 @@ class TrackHistory extends Model
         return $this->belongsTo(Track::class);
     }
 
-    public static function add(User $user, Track $track)
+    public static function add(?User $user, Track $track)
     {
+        if ($user == null) {
+            return;
+        }
+
         $trackHistory = TrackHistory::firstOrCreate([
             "user_id" => $user->id,
             "track_id" => $track->id,
@@ -36,6 +40,5 @@ class TrackHistory extends Model
 
         $trackHistory->play_count += 1;
         $trackHistory->update();
-        return;
     }
 }
