@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PlaylistPhotoController;
 use App\Http\Controllers\Api\PlaylistTrackController;
 use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
+use App\Http\Controllers\Api\TrackHistoryController;
 use App\Http\Controllers\Api\TrackPhotoController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Resources\UserResource;
@@ -95,4 +96,11 @@ Route::controller(AlbumController::class)
     ->group(function () {
         Route::get("albums", "index");
         Route::post("albums", "store");
+    });
+
+Route::controller(TrackHistoryController::class)
+    ->middleware("auth:sanctum")
+    ->group(function () {
+        Route::get("history/tracks", "index");
+        Route::delete("history/tracks/{track}", "destroy");
     });
