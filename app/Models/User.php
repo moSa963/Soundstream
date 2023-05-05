@@ -47,6 +47,10 @@ class User extends Authenticatable
         return $this->hasMany(Track::class);
     }
 
+    public function tracks_history(){
+        return $this->hasMany(TrackHistory::class)->latest("updated_at");
+    }
+
     public function liked_tracks(){
         return $this->belongsToMany(Track::class, LikedTrack::class);
     }
