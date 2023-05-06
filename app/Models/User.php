@@ -52,7 +52,7 @@ class User extends Authenticatable
     }
 
     public function liked_tracks(){
-        return $this->belongsToMany(Track::class, LikedTrack::class);
+        return $this->belongsToMany(Track::class, LikedTrack::class)->withPivot(["created_at as added_at"]);
     }
 
     public function playlists(){
