@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\TrackController;
 use App\Http\Controllers\Api\TrackHistoryController;
 use App\Http\Controllers\Api\TrackPhotoController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserPhotoController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,12 @@ Route::controller(UserController::class)
         Route::post("register", "register");
         Route::post("login", "login");
         Route::post("logout", "logout")->middleware("auth:sanctum");;
+    });
+
+Route::controller(UserPhotoController::class)
+    ->group(function () {
+        Route::get("account/{username}/profile/photo", "index");
+        Route::post("account/profile/photo", "update")->middleware("auth:sanctum");
     });
 
 Route::controller(TrackController::class)

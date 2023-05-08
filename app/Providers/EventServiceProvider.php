@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Playlist;
 use App\Models\Track;
+use App\Models\User;
 use App\Observers\PlaylistObserver;
 use App\Observers\TrackObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Track::observe(TrackObserver::class);
         Playlist::observe(PlaylistObserver::class);
+        User::observe(UserObserver::class);
     }
 
     /**
