@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\LikedTrackController;
 use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\PlaylistPhotoController;
 use App\Http\Controllers\Api\PlaylistTrackController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
 use App\Http\Controllers\Api\TrackHistoryController;
@@ -110,4 +111,10 @@ Route::controller(TrackHistoryController::class)
     ->group(function () {
         Route::get("history/tracks", "index");
         Route::delete("history/tracks/{track}", "destroy");
+    });
+
+Route::controller(SearchController::class)
+    ->middleware("auth:sanctum")
+    ->group(function () {
+        Route::get("search/{key}", "index");
     });
