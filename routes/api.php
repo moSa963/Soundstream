@@ -1,17 +1,16 @@
 <?php
 
 use App\Http\Controllers\Api\AlbumController;
-use App\Http\Controllers\Api\AlbumTrackController;
 use App\Http\Controllers\Api\LikedTrackController;
 use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\PlaylistPhotoController;
 use App\Http\Controllers\Api\PlaylistTrackController;
+use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
 use App\Http\Controllers\Api\TrackHistoryController;
 use App\Http\Controllers\Api\TrackPhotoController;
-use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserPhotoController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
@@ -32,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return new UserResource($request->user());
 });
 
-Route::controller(UserController::class)
+Route::controller(RegisterController::class)
     ->group(function () {
         Route::post("register", "register");
         Route::post("login", "login");
