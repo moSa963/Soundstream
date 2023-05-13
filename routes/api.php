@@ -11,9 +11,8 @@ use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
 use App\Http\Controllers\Api\TrackHistoryController;
 use App\Http\Controllers\Api\TrackPhotoController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserPhotoController;
-use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +26,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return new UserResource($request->user());
-});
+Route::controller(UserController::class)
+    ->middleware("auth:sanctum")
+    ->group(function () {
+        Route::get("user", "index");
+        Route::get("users/{username}", "show");
+    });
 
 Route::controller(RegisterController::class)
     ->group(function () {
