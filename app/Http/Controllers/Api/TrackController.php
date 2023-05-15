@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTrackRequest;
+use App\Http\Requests\UpdateTrackRequest;
 use App\Http\Resources\TrackResource;
 use App\Models\Playlist;
 use App\Models\Track;
@@ -30,6 +31,15 @@ class TrackController extends Controller
         $this->authorize("uploadTrack", $playlist);
 
         $track = $request->store($playlist);
+
+        return new TrackResource($track);
+    }
+
+    public function update(UpdateTrackRequest $request, Track $track) 
+    {
+        $this->authorize("update", $track);
+
+        $track = $request->update($track);
 
         return new TrackResource($track);
     }
