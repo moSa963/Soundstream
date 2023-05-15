@@ -52,6 +52,7 @@ Route::controller(TrackController::class)
         Route::get("tracks", "index");
         Route::get("tracks/{track}", "show");
         Route::post("tracks/albums/{playlist}", "store");
+        Route::post("tracks/{track}", "update");
         Route::delete("tracks/{track}", "destroy");
     });
 
