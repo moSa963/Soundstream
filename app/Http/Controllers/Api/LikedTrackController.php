@@ -18,7 +18,8 @@ class LikedTrackController extends Controller
         //if username input exists just get the liked tracks that belong to that specific user
         if ($request->has("username"))
         {
-            $q = $q->where("tracks.username", $request->query("username"));
+            $user = User::where("username", $request->query("username"))->firstOrFail();
+            $q = $q->where("tracks.user_id", $user->id);
         }
 
         $tracks = $q->simplePaginate($request->query("count", 100))->withQueryString();
