@@ -11,8 +11,10 @@ use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
 use App\Http\Controllers\Api\TrackHistoryController;
 use App\Http\Controllers\Api\TrackPhotoController;
+use App\Http\Controllers\Api\UserAlbumController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserPhotoController;
+use App\Http\Controllers\Api\UserPlaylistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -106,6 +108,12 @@ Route::controller(AlbumController::class)
     ->group(function () {
         Route::get("albums", "index"); //query params: count
         Route::post("albums", "store");
+    });
+
+Route::controller(UserAlbumController::class)
+    ->middleware("auth:sanctum")
+    ->group(function () {
+        Route::get("users/{username}/albums", "index"); //query params: count
     });
 
 Route::controller(TrackHistoryController::class)
