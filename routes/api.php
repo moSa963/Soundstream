@@ -68,6 +68,12 @@ Route::controller(PlaylistController::class)
         Route::delete("playlists/{playlist}", "destroy");
     });
 
+Route::controller(UserPlaylistController::class)
+    ->middleware("auth:sanctum")
+    ->group(function () {
+        Route::get("users/{username}/playlists", "index"); //query params: count
+    });
+
 Route::controller(PlaylistTrackController::class)
     ->middleware("auth:sanctum")
     ->group(function () {
