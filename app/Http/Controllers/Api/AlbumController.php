@@ -11,9 +11,9 @@ class AlbumController extends Controller
 {
     public function index(Request $request) 
     {
-        $playlists = $request->user()->albums()->get();
+        $albums = $request->user()->albums()->simplePaginate($request->query("count", 100))->withQueryString();
 
-        return PlaylistResource::collection($playlists);
+        return PlaylistResource::collection($albums);
     }
 
     public function store(StorePlaylistRequest $request)

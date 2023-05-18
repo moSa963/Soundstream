@@ -6,13 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TrackResource;
 use App\Models\LikedTrack;
 use App\Models\Track;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LikedTrackController extends Controller
 {
     public function index(Request $request)
     {
-        $tracks = $request->user()->liked_tracks()->get();
+        $q = $request->user()->liked_tracks();
+
+        $tracks = $q->simplePaginate($request->query("count", 100))->withQueryString();;
         
         return TrackResource::collection($tracks);
     }
