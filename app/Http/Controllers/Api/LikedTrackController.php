@@ -14,8 +14,14 @@ class LikedTrackController extends Controller
     public function index(Request $request)
     {
         $q = $request->user()->liked_tracks();
+        
+        //if username input exists just get the liked tracks that belong to that specific user
+        if ($request->has("username"))
+        {
+            $q = $q->where("tracks.username", $request->query("username"));
+        }
 
-        $tracks = $q->simplePaginate($request->query("count", 100))->withQueryString();;
+        $tracks = $q->simplePaginate($request->query("count", 100))->withQueryString();
         
         return TrackResource::collection($tracks);
     }

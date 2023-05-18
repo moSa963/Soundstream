@@ -59,7 +59,7 @@ Route::controller(TrackController::class)
 Route::controller(PlaylistController::class)
     ->middleware("auth:sanctum")
     ->group(function () {
-        Route::get("playlists", "index");
+        Route::get("playlists", "index"); //query params: count
         Route::get("playlists/{playlist}", "show");
         Route::post("playlists", "store");
         Route::post("playlists/{playlist}", "update");
@@ -77,7 +77,7 @@ Route::controller(PlaylistTrackController::class)
 Route::controller(LikedTrackController::class)
     ->middleware("auth:sanctum")
     ->group(function () {
-        Route::get("likes", "index");
+        Route::get("likes", "index");  //query params: count, username
         Route::post("likes/tracks/{track}", "store");
         Route::delete("likes/tracks/{track}", "destroy");
     });
@@ -104,7 +104,7 @@ Route::controller(PlaylistPhotoController::class)
 Route::controller(AlbumController::class)
     ->middleware("auth:sanctum")
     ->group(function () {
-        Route::get("albums", "index");
+        Route::get("albums", "index"); //query params: count
         Route::post("albums", "store");
     });
 
