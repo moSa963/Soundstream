@@ -25,7 +25,7 @@ class TrackResource extends JsonResource
             'explicit' => $this->explicit,
             'written_by' => $this->written_by,
             'performed_by' => $this->performed_by,
-            'album' => new PlaylistResource($this->playlists()->where("playlists.album", true)->first()),
+            'album' => new PlaylistResource($this->album()->first()),
             'created_at' =>  $this->created_at,
             'added_at' => $this->added_at,
             'liked' => $request->user()->liked_tracks()->wherePivot("track_id", $this->id)->exists(),
