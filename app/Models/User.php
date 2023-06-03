@@ -56,11 +56,11 @@ class User extends Authenticatable
     }
 
     public function owned_playlists(){
-        return $this->hasMany(Playlist::class)->where("album", false);
+        return $this->hasMany(Playlist::class);
     }
 
     public function liked_playlists(){
-        return $this->belongsToMany(Playlist::class, LikedPlaylist::class)->select("playlists.*")->where("album", false);
+        return $this->belongsToMany(Playlist::class, LikedPlaylist::class)->select("playlists.*");
     }
 
     public function playlists(){
