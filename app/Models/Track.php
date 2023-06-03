@@ -30,6 +30,10 @@ class Track extends Model
         return $this->belongsToMany(Playlist::class, PlaylistTrack::class);
     }
 
+    public function album(){
+        return $this->playlists()->where("album", true);
+    }
+
     public function likes(){
         return $this->hasMany(LikedTrack::class);
     }
