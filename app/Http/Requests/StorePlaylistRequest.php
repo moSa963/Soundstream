@@ -21,7 +21,7 @@ class StorePlaylistRequest extends FormRequest
     {
         return Playlist::create([
             'user_id' => $user->id,
-            'title' => $this->validated("title", "playlist ".($user->playlists()->count() + 1)),
+            'title' => $this->validated("title", "playlist ".($user->owned_playlists()->count() + 1)),
             'description' => $this->validated("description", ""),
             'album' => $album,
         ]);

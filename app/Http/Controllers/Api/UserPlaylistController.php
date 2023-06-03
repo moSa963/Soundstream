@@ -13,7 +13,7 @@ class UserPlaylistController extends Controller
     {
         $user = User::where("username", $username)->firstOrFail();
 
-        $playlists = $user->playlists()->simplePaginate($request->query("count", 100))->withQueryString();
+        $playlists = $user->owned_playlists()->simplePaginate($request->query("count", 100))->withQueryString();
 
         return PlaylistResource::collection($playlists);
     }

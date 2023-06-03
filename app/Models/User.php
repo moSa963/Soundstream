@@ -55,8 +55,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Track::class, LikedTrack::class)->withPivot(["created_at as added_at"]);
     }
 
-    public function playlists(){
+    public function owned_playlists(){
         return $this->hasMany(Playlist::class)->where("album", false);
+    }
+
+    public function liked_playlists(){
+        return $this->belongsToMany(Playlist::class, LikedPlaylist::class)->select("playlists.*")->where("album", false);
+    }
+
+    public function playlists(){
+        return $this->owned_playlists()->union($this->liked_playlists());
     }
 
     public function albums(){
