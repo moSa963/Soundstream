@@ -12,7 +12,7 @@ class PlaylistController extends Controller
 {
     public function index(Request $request)
     {
-        $playlists = $request->user()->playlists()->simplePaginate($request->query("count", 100))->withQueryString();
+        $playlists = $request->user()->playlists()->get();
 
         return PlaylistResource::collection($playlists);
     }
