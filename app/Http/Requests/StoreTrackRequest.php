@@ -59,8 +59,8 @@ class StoreTrackRequest extends FormRequest
         return [
             "title" => ["required", "string", "min:3", "max:255"],
             "explicit" => ["boolean"],
-            "written_by" => ["string"],
-            "performed_by" => ["string"],
+            "written_by" => ["string", "max:255"],
+            "performed_by" => ["string", "max:255"],
             "track" => ["required", "file", "mimetypes:audio/mpeg,audio/mpga,audio/mp3,audio/wav"],
         ];
     }

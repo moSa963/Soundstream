@@ -44,7 +44,7 @@ class StorePlaylistRequest extends FormRequest
     {
         return [
             'title' => ['string', 'max:255'],
-            'description' => ['string', 'max:1500'],
+            'description' => ['string', 'max:800'],
         ];
     }
 }
