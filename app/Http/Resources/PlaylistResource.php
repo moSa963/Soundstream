@@ -23,6 +23,7 @@ class PlaylistResource extends JsonResource
             'description' => $this->description,
             'album' => $this->album,
             'created_at' => $this->created_at,
+            'liked' => $request->user()->liked_playlists()->wherePivot("playlist_id", $this->id)->exists(),
         ];
     }
 }
