@@ -133,7 +133,7 @@ Route::controller(UserAlbumController::class)
 Route::controller(TrackHistoryController::class)
     ->middleware("auth:sanctum")
     ->group(function () {
-        Route::get("history/tracks", "index");
+        Route::get("history/tracks", "index"); //query params: count
         Route::delete("history/tracks/{track}", "destroy");
     });
 
