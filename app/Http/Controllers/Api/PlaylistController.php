@@ -21,7 +21,7 @@ class PlaylistController extends Controller
     {   
         $this->authorize("view", $playlist);
 
-        return new PlaylistResource($playlist);
+        return new PlaylistResource($playlist->loadCount("playlists_tracks"));
     }
 
     public function store(StorePlaylistRequest $request)
