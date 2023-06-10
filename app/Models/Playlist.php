@@ -26,4 +26,8 @@ class Playlist extends Model
     public function tracks(){
         return $this->belongsToMany(Track::class, PlaylistTrack::class)->withPivot(["created_at as added_at"]);
     }
+
+    public function playlists_tracks(){
+        return $this->hasMany(PlaylistTrack::class);
+    }
 }
