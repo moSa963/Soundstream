@@ -24,6 +24,7 @@ class StorePlaylistRequest extends FormRequest
             'title' => $this->validated("title", "playlist ".($user->owned_playlists()->count() + 1)),
             'description' => $this->validated("description", ""),
             'album' => $album,
+            'private' => $this->validated("private", true),
         ]);
     }
 
@@ -32,6 +33,7 @@ class StorePlaylistRequest extends FormRequest
         return $playlist->update([
             'title' => $this->validated("title", $playlist->title),
             'description' => $this->validated("description", $playlist->description),
+            'private' => $this->validated("private", $playlist->private),
         ]);
     }
 
@@ -45,6 +47,7 @@ class StorePlaylistRequest extends FormRequest
         return [
             'title' => ['string', 'max:255'],
             'description' => ['string', 'max:800'],
+            'private' => ['boolean'],
         ];
     }
 }
