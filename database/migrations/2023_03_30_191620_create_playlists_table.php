@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("description", 800);
             $table->string("photo")->nullable();
             $table->boolean("album")->default(false);
+            $table->boolean("private")->default(true);
             $table->timestamps();
         });
     }
