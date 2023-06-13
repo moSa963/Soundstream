@@ -16,6 +16,7 @@ class Playlist extends Model
         'description',
         'photo',
         'album',
+        'private',
     ];
 
 

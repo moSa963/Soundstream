@@ -23,6 +23,7 @@ class PlaylistFactory extends Factory
             'title' => fake()->title(),
             'description' => fake()->paragraph(2),
             'album' => false,
+            'private' => false,
         ];
     }
 
