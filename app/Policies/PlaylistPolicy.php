@@ -14,7 +14,7 @@ class PlaylistPolicy
      */
     public function view(User $user, Playlist $playlist): bool
     {
-        return true;
+        return ! $playlist->private || $user->id == $playlist->user_id;
     }
 
     public function uploadTrack(User $user, Playlist $playlist): bool
