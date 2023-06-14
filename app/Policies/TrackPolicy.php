@@ -16,7 +16,7 @@ class TrackPolicy
 
     public function show(User $user, Track $track): bool
     {
-        return $track->user_id == $user->id || ! $track->album()->firstOrFaile()->private;
+        return $track->user_id == $user->id || ! $track->album()->firstOrFail()->private;
     }
 
     public function update(User $user, Track $track): bool
