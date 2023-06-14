@@ -11,6 +11,8 @@ class LikedPlaylistController extends Controller
 {
     public function store(Request $request, Playlist $playlist)
     {
+        $this->authorize("view", $playlist);
+        
         LikedPlaylist::firstOrCreate([
             'user_id' => $request->user()->id,
             'playlist_id' => $playlist->id,
