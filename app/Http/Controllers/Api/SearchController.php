@@ -15,10 +15,10 @@ class SearchController extends Controller
 {
     public function index(Request $request, string $key)
     {
-        $tracks = Track::where("title", "like", "%{$key}%")->take(5)->get();
-        $albums = Playlist::where("album", true)->where("title", "like", "%{$key}%")->take(5)->get();
-        $playlists = Playlist::where("album", false)->where("title", "like", "%{$key}%")->take(5)->get();
-        $users = User::where("username", "like", "%{$key}%")->orWhere("name", "like", "%{$key}%")->take(5)->get();
+        $tracks = Track::public_tracks()->where("tracks.title", "like", "%{$key}%")->take(10)->get();
+        $albums = Playlist::where("album", true)->where("title", "like", "%{$key}%")->where("private", false)->take(10)->get();
+        $playlists = Playlist::where("album", false)->where("title", "like", "%{$key}%")->where("private", false)->take(10)->get();
+        $users = User::where("username", "like", "%{$key}%")->orWhere("name", "like", "%{$key}%")->take(10)->get();
 
         return response()->json([
             "data" => [
