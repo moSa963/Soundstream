@@ -30,5 +30,8 @@ class UpdateTrackTest extends TestCase
         $response->assertJsonPath("data.explicit", true);
         $response->assertJsonPath("data.written_by", "newWritten_by");
         $response->assertJsonPath("data.performed_by", "newPerformed_by");
+
+
+        $track->delete();
     }
 }
