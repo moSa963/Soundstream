@@ -29,6 +29,8 @@ class LikedTrackController extends Controller
 
     public function store(Request $request, Track $track)
     {
+        $this->authorize("show", $track);
+
         LikedTrack::firstOrCreate([
             'user_id' => $request->user()->id,
             'track_id' => $track->id,
