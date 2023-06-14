@@ -3,6 +3,8 @@
 namespace Tests\Feature\Api;
 
 use App\Models\LikedTrack;
+use App\Models\Playlist;
+use App\Models\PlaylistTrack;
 use App\Models\Track;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,6 +21,11 @@ class StoreLikedTrackTest extends TestCase
     {
         $user = User::factory()->create();
         $track = Track::factory()->create();
+
+        PlaylistTrack::create([
+            "playlist_id" => Playlist::factory()->create([ "album" => true ])->id,
+            "track_id" => $track->id
+        ]);
 
         Sanctum::actingAs($user);
 
