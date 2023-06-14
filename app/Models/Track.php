@@ -31,10 +31,18 @@ class Track extends Model
     }
 
     public function album(){
-        return $this->playlists()->where("album", true);
+        return $this->playlists()->where("album", true)->take(1);
     }
 
     public function likes(){
         return $this->hasMany(LikedTrack::class);
+    }
+
+    public static function public_tracks(){
+        return Track::select("tracks.*")
+                    ->join("playlists_tracks", "playlists_tracks.track_id", "=", "tracks.id")
+                    ->join("playlists", "playlists.id", "=", "playlists_tracks.playlist_id")
+                    ->where("playlists.album", true)
+                    ->where("playlists.private", false);
     }
 }
