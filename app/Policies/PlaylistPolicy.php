@@ -12,9 +12,11 @@ class PlaylistPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Playlist $playlist): bool
+    public function view(User $user, Playlist $playlist): Response
     {
-        return ! $playlist->private || $user->id == $playlist->user_id;
+        return (! $playlist->private || $user->id == $playlist->user_id) 
+                    ? Response::allow() 
+                    : Response::deny("This playlist is private right now");
     }
 
     public function uploadTrack(User $user, Playlist $playlist): bool
