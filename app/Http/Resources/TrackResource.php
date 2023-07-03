@@ -22,7 +22,7 @@ class TrackResource extends JsonResource
             ],
             'title' => $this->title,
             'duration' => $this->duration,
-            'explicit' => $this->explicit,
+            'explicit' => boolval($this->explicit),
             'written_by' => $this->written_by,
             'performed_by' => $this->performed_by,
             'album' => new PlaylistResource($this->album()->first()),
