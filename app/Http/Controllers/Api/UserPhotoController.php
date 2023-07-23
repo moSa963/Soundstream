@@ -19,7 +19,7 @@ class UserPhotoController extends Controller
             return Storage::response("user_photo/{$user->username}");
         }
 
-        return response()->noContent();
+        return response()->redirectTo("img/user.png");
     }
 
     public function update(UpdateUserPhotoRequest $request)
