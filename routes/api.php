@@ -99,6 +99,7 @@ Route::controller(LikedPlaylistController::class)
     });
 
 Route::controller(StreamTrackController::class)
+    ->middleware("auth:sanctum")
     ->group(function () {
         Route::get("tracks/{track}/stream", "show");
     });
