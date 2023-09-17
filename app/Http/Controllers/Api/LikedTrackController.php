@@ -22,7 +22,7 @@ class LikedTrackController extends Controller
             $q = $q->where("tracks.user_id", $user->id);
         }
 
-        $tracks = $q->simplePaginate($request->query("count", 100))->withQueryString();
+        $tracks = $q->latest()->simplePaginate($request->query("count", 100))->withQueryString();
         
         return TrackResource::collection($tracks);
     }

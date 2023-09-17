@@ -12,7 +12,7 @@ class TrackHistoryController extends Controller
 {
     public function index(Request $request)
     {
-        $tracksHistory = $request->user()->tracks_history()->with("track")->simplePaginate($request->query("count", 10));
+        $tracksHistory = $request->user()->tracks_history()->latest()->with("track")->simplePaginate($request->query("count", 10));
 
         return TrackHistoryResource::collection($tracksHistory);
     }
