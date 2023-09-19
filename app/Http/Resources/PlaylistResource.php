@@ -26,6 +26,7 @@ class PlaylistResource extends JsonResource
             'liked' => $request->user()->liked_playlists()->wherePivot("playlist_id", $this->id)->exists(),
             'tracks_count' => $this->whenCounted('playlists_tracks'),
             'private' => boolval($this->private),
+            'image' => $this->photo,
         ];
     }
 }

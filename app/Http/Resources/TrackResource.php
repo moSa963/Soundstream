@@ -29,6 +29,7 @@ class TrackResource extends JsonResource
             'created_at' =>  $this->created_at,
             'added_at' => $this->added_at ?? $this->created_at,
             'liked' => $request->user()->liked_tracks()->wherePivot("track_id", $this->id)->exists(),
+            'image' => $this->photo,
         ];
     }
 }

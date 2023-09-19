@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateTrackPhotoRequest;
+use App\Http\Resources\TrackResource;
 use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,9 +12,9 @@ use Illuminate\Support\Facades\Storage;
 class TrackPhotoController extends Controller
 {
 
-    public function index(Request $request, Track $track)
+    public function index(Request $request, Track $track, string $key)
     {
-        if($track->photo != null)
+        if($track->photo == $key)
         {
             return Storage::response("track_photo/{$track->photo}");
         }
@@ -27,7 +28,7 @@ class TrackPhotoController extends Controller
 
         $request->update($track);
 
-        return response()->noContent();
+        return new TrackResource($track);
     }
 
     public function destroy(Request $request, Track $track)
