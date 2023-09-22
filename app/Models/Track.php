@@ -38,6 +38,10 @@ class Track extends Model
         return $this->hasMany(LikedTrack::class);
     }
 
+    public function lyrics(){
+        return $this->hasOne(TrackLyrics::class);
+    }
+
     public static function public_tracks(){
         return Track::select("tracks.*")
                     ->join("playlists_tracks", "playlists_tracks.track_id", "=", "tracks.id")
