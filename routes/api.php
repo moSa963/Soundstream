@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\StreamTrackController;
 use App\Http\Controllers\Api\TrackController;
 use App\Http\Controllers\Api\TrackHistoryController;
+use App\Http\Controllers\Api\TrackLyricsController;
 use App\Http\Controllers\Api\TrackPhotoController;
 use App\Http\Controllers\Api\UserAlbumController;
 use App\Http\Controllers\Api\UserController;
@@ -142,4 +143,11 @@ Route::controller(SearchController::class)
     ->middleware("auth:sanctum")
     ->group(function () {
         Route::get("search/{key}", "index");
+    });
+
+Route::controller(TrackLyricsController::class)
+    ->middleware("auth:sanctum")
+    ->group(function () {
+        Route::get("lyrics/tracks/{track}", "show");
+        Route::post("lyrics/tracks/{track}", "store");
     });
