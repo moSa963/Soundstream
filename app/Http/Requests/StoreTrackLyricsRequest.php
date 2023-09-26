@@ -25,7 +25,7 @@ class StoreTrackLyricsRequest extends FormRequest
             ],
             [
                 'lyrics' => $this->validated("lyrics"),
-                'timestamps' => $this->validated("timestamps"),
+                'timestamps' => $this->validated("timestamps", ""),
             ]
         );
     }
@@ -39,7 +39,7 @@ class StoreTrackLyricsRequest extends FormRequest
     {
         return [
             "lyrics" => ["required", "string"],
-            "timestamps" => ["required", "string", "regex:/^([0-9]+,)+$/"],
+            "timestamps" => ["string", "regex:/^(([0-9]+(.[0-9])?),)+([0-9]+(.[0-9])?)+$/"],
         ];
     }
 }
