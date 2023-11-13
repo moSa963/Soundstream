@@ -6,6 +6,7 @@ use App\Models\Playlist;
 use App\Models\PlaylistTrack;
 use App\Models\Track;
 use App\Models\User;
+use App\Services\AudioService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,7 @@ class StoreTrackRequest extends FormRequest
             'user_id' => $this->user()->id,
             'title' => $this->validated("title"),
             'location' => explode('/', $path, 2)[1],
-            'duration' => 0,
+            'duration' => AudioService::duration(Storage::path($path)),
             'explicit' => $this->validated("explicit", false),
             'written_by' => $this->validated("written_by", ""),
             'performed_by' => $this->validated("performed_by", ""),
