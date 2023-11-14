@@ -22,7 +22,7 @@ class StoreTrackLyricsTest extends TestCase
 
         $data = [
             'lyrics' => "this is some lyrics",
-            'timestamps' => "0,25,100,150,1200,",
+            'timestamps' => "0,25,100,150,1200",
         ];
 
         $response = $this->post("api/lyrics/tracks/{$track->id}", $data);
@@ -41,7 +41,7 @@ class StoreTrackLyricsTest extends TestCase
 
         $data = [
             'lyrics' => "this is some lyrics",
-            'timestamps' => "0,25,10,,0,150,1200,",
+            'timestamps' => "0,25,10,,0,150,1200",
         ];
 
         $response = $this->postJson("api/lyrics/tracks/{$track->id}", $data);
