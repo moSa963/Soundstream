@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SoundStream</title>
-    <script type="module" crossorigin src="/assets/index-328b3b06.js"></script>
+    <script type="module" crossorigin src="/assets/index-14814964.js"></script>
     <link rel="stylesheet" href="/assets/index-dcd4892b.css">
   </head>
   <body>
