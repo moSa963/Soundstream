@@ -32,7 +32,7 @@ class StoreTrackRequest extends FormRequest
             'user_id' => $this->user()->id,
             'title' => $this->validated("title"),
             'location' => explode('/', $path, 2)[1],
-            'duration' => AudioService::duration(Storage::path($path)),
+            'duration' => AudioService::duration(Storage::path($path)) ?: 0,
             'explicit' => $this->validated("explicit", false),
             'written_by' => $this->validated("written_by", ""),
             'performed_by' => $this->validated("performed_by", ""),
