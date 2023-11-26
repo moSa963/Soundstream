@@ -18,6 +18,7 @@ class PlaylistResource extends JsonResource
             'id' => $this->id,
             'user' => [
                 "username" => $this->user->username,
+                "photo" => $this->user->photo,
             ],
             'title' => $this->title,
             'description' => $this->description,

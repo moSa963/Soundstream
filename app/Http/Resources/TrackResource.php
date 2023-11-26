@@ -19,6 +19,7 @@ class TrackResource extends JsonResource
             'id' => $this->id,
             'user' => [
                 "username" => $this->user->username,
+                "photo" => $this->user->photo,
             ],
             'title' => $this->title,
             'duration' => $this->duration,
