@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateUserPhotoRequest extends FormRequest
 {
@@ -17,7 +18,17 @@ class UpdateUserPhotoRequest extends FormRequest
 
     public function update(): void
     {
-        $this->file("photo")->storeAs("user_photo", $this->user()->username);
+        $path = $this->file("photo")->store("user_photo", 'local');
+
+        abort_if(!$path, 400, "Couldn't save the photo");
+
+        if ($this->user()->photo != null) {
+            Storage::delete("user_photo/{$this->user()->photo}");
+        }
+
+        $this->user()->update([
+            "photo" => explode('/', $path, 2)[1],
+        ]);
     }
 
     public function rules(): array

@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserPhotoRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class UserPhotoController extends Controller
 {
-    public function index(Request $request, string $username)
+    public function index(Request $request, string $username, string $key)
     {
         $user = User::where("username", $username)->firstOrFail();
 
-        if(Storage::exists("user_photo/{$user->username}"))
-        {
-            return Storage::response("user_photo/{$user->username}");
+        if ($user->photo == $key) {
+            return Storage::response("user_photo/{$user->photo}");
         }
 
         return response()->redirectTo("img/user.png");
@@ -24,8 +24,8 @@ class UserPhotoController extends Controller
 
     public function update(UpdateUserPhotoRequest $request)
     {
-        $request->update();
+        $request->update($request->user());
 
-        return response()->noContent();
+        return new UserResource($request->user());
     }
 }

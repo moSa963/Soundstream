@@ -26,10 +26,12 @@ class UserPhotoTest extends TestCase
 
         $response->assertSuccessful();
         
-        Storage::assertExists("user_photo/{$user->username}");
+        $user = User::find($user->id);
+
+        Storage::assertExists("user_photo/{$user->photo}");
 
         $user->delete();
 
-        Storage::assertMissing("user_photo/{$user->username}");
+        Storage::assertMissing("user_photo/{$user->photo}");
     }
 }

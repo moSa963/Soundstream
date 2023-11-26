@@ -46,7 +46,7 @@ Route::controller(RegisterController::class)
 
 Route::controller(UserPhotoController::class)
     ->group(function () {
-        Route::get("account/{username}/profile/photo", "index");
+        Route::get("account/{username}/profile/photo/{key}", "index");
         Route::post("account/profile/photo", "update")->middleware("auth:sanctum");
     });
 

@@ -9,6 +9,6 @@ class UserObserver
 {
     public function deleted(User $user): void
     {
-        Storage::delete("user_photo/{$user->username}");
+        Storage::delete("user_photo/{$user->photo}");
     }
 }
