@@ -31,6 +31,6 @@ class PlaylistPolicy
 
     public function update(User $user, Playlist $playlist): bool
     {
-        return !$playlist->album && $user->id == $playlist->user_id;
+        return $user->id == $playlist->user_id;
     }
 }
